@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: fdlessard@gmail.com
+      changes:
+        - loadData:
+            tableName: order
+            file: "db/data/order.csv"
+            encoding: UTF-8
+            separator: ','
+            quotchar: "'"
+            columns:
+              - column:
+                  name: name
+                  type: string
+              - column:
+                  name: description
+                  type: string
+
+        - loadData:
+            tableName: order_item
+            file: db/data/order-item.csv
+            encoding: UTF-8
+            separator: ','
+            quotchar: "'"
+            columns:
+              - column:
+                  name: order_id
+                  type: numeric
+              - column:
+                  name: name
+                  type: string
+              - column:
+                  name: quantity
+                  type: numeric
+

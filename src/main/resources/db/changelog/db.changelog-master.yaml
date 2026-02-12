@@ -1,0 +1,35 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: fdlessard@gmail.com
+      changes:
+
+        - createTable:
+            tableName: order
+            columns:
+              - column: {name: id, type: bigserial, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: version, type: int, defaultValueNumeric: 0, constraints: {nullable: false}}
+              - column: {name: name, type: varchar(50)}
+              - column: {name: description, type: varchar(50)}
+
+        - createTable:
+            tableName: order_item
+            columns:
+              - column: {name: id, type: bigserial, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: order_id, type: bigint, constraints: {nullable: false}}
+              - column: {name: version, type: int, defaultValueNumeric: 0, constraints: {nullable: false}}
+              - column: {name: name, type: varchar(50)}
+              - column: {name: quantity, type: int}
+
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: order_item
+            constraintName: fk_order_order_item
+            referencedTableName: order
+            referencedColumnNames: id
+
+
+
+  - include:
+      file: "db/data/db.data.yaml"
