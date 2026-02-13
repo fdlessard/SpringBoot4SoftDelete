@@ -1,0 +1,26 @@
+### Get all orders
+GET http://localhost:8080/orders
+Content-Type: application/json
+
+### Get all orders
+GET http://localhost:8080/orders?onlyDeleted=true
+Content-Type: application/json
+
+
+### Get all orders
+GET http://localhost:8080/orders?includeDeleted=true
+Content-Type: application/json
+
+
+### Get all orders
+GET http://localhost:8080/orders?includeDeleted=false
+Content-Type: application/json
+
+
+
+### Delete all orders
+DELETE http://localhost:8080/orders/2
+Content-Type: application/json
+
+
+

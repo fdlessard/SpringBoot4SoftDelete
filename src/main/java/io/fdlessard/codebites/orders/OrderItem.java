@@ -6,12 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.SQLDelete;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Table(name = "order_item", schema = "public")
 @Entity
+@SQLDelete(sql = "update public.order_item set deleted_date = now() where id=? and version=?")
+@FilterDef(name = "notDeletedFilter")
+@Filter(name = "notDeletedFilter", condition = "deleted_at is null")
+@FilterDef(name = "deletedOnlyFilter")
+@Filter(name = "deletedOnlyFilter", condition = "deleted_at is not null")
 @Builder
 @Data
 @AllArgsConstructor
@@ -38,5 +47,13 @@ public class OrderItem implements Serializable {
     @ManyToOne
     @JoinColumn(name="order_id")
     private Order order;
+
+    @Column(name = "deleted_date")
+    private Instant deletedDate;
+
+    @PreRemove
+    public void preRemove() {
+        this.deletedDate = Instant.now();
+    }
 
 }

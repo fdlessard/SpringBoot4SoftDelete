@@ -1,0 +1,9 @@
+### Actuator
+GET http://localhost:8080/actuator
+
+### Actuator Info
+GET http://localhost:8080/actuator/info
+
+
+
+

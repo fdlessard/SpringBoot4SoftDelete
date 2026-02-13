@@ -16,6 +16,9 @@ databaseChangeLog:
               - column:
                   name: description
                   type: string
+              - column:
+                  name: deleted_date
+                  type: datetime
 
         - loadData:
             tableName: order_item
@@ -33,4 +36,7 @@ databaseChangeLog:
               - column:
                   name: quantity
                   type: numeric
+              - column:
+                  name: deleted_date
+                  type: datetime
 
