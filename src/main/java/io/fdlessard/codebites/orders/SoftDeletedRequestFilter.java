@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class SoftDeletedRequestFilter extends OncePerRequestFilter {
 
@@ -34,8 +36,10 @@ public class SoftDeletedRequestFilter extends OncePerRequestFilter {
 
         if (onlyDeleted) {
             session.enableFilter("deletedOnlyFilter");
+            logger.info("FILTER: deletedOnlyFilter enabled");
         } else if (!includeDeleted) {
             session.enableFilter("notDeletedFilter");
+            logger.info("FILTER: notDeletedFilter enabled");
         }
 
         try {
