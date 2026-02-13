@@ -19,9 +19,9 @@ import java.util.List;
 @Entity
 @SQLDelete(sql = "update public.order set deleted_date = now() where id=? and version=?")
 @FilterDef(name = "notDeletedFilter")
-@Filter(name = "notDeletedFilter", condition = "deleted_at is null")
+@Filter(name = "notDeletedFilter", condition = "deleted_date is null")
 @FilterDef(name = "deletedOnlyFilter")
-@Filter(name = "deletedOnlyFilter", condition = "deleted_at is not null")
+@Filter(name = "deletedOnlyFilter", condition = "deleted_date is not null")
 @Builder
 @Data
 @AllArgsConstructor
